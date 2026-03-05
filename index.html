@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Claude AI – 3-Month Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --card: #1a1a26;
+    --border: #2a2a40;
+    --accent1: #ff6b35;
+    --accent2: #7c3aed;
+    --accent3: #06b6d4;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --m1: #ff6b35;
+    --m2: #7c3aed;
+    --m3: #06b6d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; position: relative; z-index: 1; }
+
+  header { text-align: center; margin-bottom: 48px; animation: fadeDown 0.8s ease both; }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(124,58,237,0.15));
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--accent1);
+    font-size: 17px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 2px; margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 68px); font-weight: 800; line-height: 1.0; letter-spacing: -2px;
+    background: linear-gradient(135deg, #fff 0%, #a0a0d0 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .subtitle { color: var(--muted); font-size: 17px; letter-spacing: 0.5px; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+  /* TABS */
+  .tab-nav {
+    display: flex; gap: 4px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px; margin-bottom: 40px; animation: fadeUp 0.5s 0.2s ease both;
+  }
+
+  .tab-btn {
+    flex: 1; padding: 12px 20px; border: none; border-radius: 4px;
+    background: transparent; color: var(--muted);
+    font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    transition: all 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  .tab-btn:hover { color: var(--text); }
+
+  .tab-btn.active {
+    background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(124,58,237,0.15));
+    color: var(--text); border: 1px solid rgba(255,107,53,0.2);
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+    padding: 20px 28px; margin-bottom: 48px; display: flex; align-items: center; gap: 20px;
+  }
+  .progress-label { font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3)); border-radius: 3px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+  .progress-count { font-size: 17px; color: var(--accent3); white-space: nowrap; min-width: 80px; text-align: right; }
+
+  /* MONTH SECTIONS */
+  .month-section { margin-bottom: 52px; animation: fadeUp 0.7s ease both; }
+  .month-header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+  .month-pill { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 8px 18px; border-radius: 2px; white-space: nowrap; }
+  .m1 .month-pill { background: rgba(255,107,53,0.15); color: var(--m1); border: 1px solid rgba(255,107,53,0.25); }
+  .m2 .month-pill { background: rgba(124,58,237,0.15); color: var(--m2); border: 1px solid rgba(124,58,237,0.25); }
+  .m3 .month-pill { background: rgba(6,182,212,0.15); color: var(--m3); border: 1px solid rgba(6,182,212,0.25); }
+  .month-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+  .month-divider { flex: 1; height: 1px; background: var(--border); }
+
+  /* COURSE CARDS */
+  .courses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .course-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 22px; cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; }
+  .course-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.25s; }
+  .m1 .course-card::before { background: linear-gradient(90deg, var(--m1), transparent); }
+  .m2 .course-card::before { background: linear-gradient(90deg, var(--m2), transparent); }
+  .m3 .course-card::before { background: linear-gradient(90deg, var(--m3), transparent); }
+  .course-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .course-card:hover::before { opacity: 1; }
+  .course-card.completed { background: rgba(6,182,212,0.04); border-color: rgba(6,182,212,0.2); }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .platform-tag { font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); padding: 3px 8px; border: 1px solid var(--border); border-radius: 2px; white-space: nowrap; }
+  .free-tag { font-size: 16px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; white-space: nowrap; font-weight: 500; }
+  .free { background: rgba(16,185,129,0.12); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
+  .paid { background: rgba(245,158,11,0.12); color: var(--gold); border: 1px solid rgba(245,158,11,0.2); }
+  .checkbox { width: 22px; height: 22px; border: 1.5px solid var(--border); border-radius: 3px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; color: transparent; font-size: 17px; cursor: pointer; }
+  .course-card.completed .checkbox { background: var(--accent3); border-color: var(--accent3); color: #000; }
+  .course-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 600; line-height: 1.35; margin-bottom: 8px; color: var(--text); }
+  .course-desc { font-size: 16px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .duration { font-size: 13px; color: var(--muted); }
+  .visit-link { font-size: 13px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; padding: 5px 12px; border-radius: 2px; transition: all 0.2s; }
+  .m1 .visit-link { color: var(--m1); border: 1px solid rgba(255,107,53,0.3); }
+  .m1 .visit-link:hover { background: rgba(255,107,53,0.12); }
+  .m2 .visit-link { color: var(--m2); border: 1px solid rgba(124,58,237,0.3); }
+  .m2 .visit-link:hover { background: rgba(124,58,237,0.12); }
+  .m3 .visit-link { color: var(--m3); border: 1px solid rgba(6,182,212,0.3); }
+  .m3 .visit-link:hover { background: rgba(6,182,212,0.12); }
+
+  /* TIPS */
+  .tips { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 32px; margin-top: 16px; }
+  .tips-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .tip { display: flex; gap: 12px; align-items: flex-start; }
+  .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip-text { font-size: 16px; color: var(--muted); line-height: 1.65; }
+  .tip-text strong { color: var(--text); display: block; margin-bottom: 2px; font-size: 16px; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PROMPT ENGINEERING TAB */
+  .pe-hero {
+    background: linear-gradient(135deg, rgba(255,107,53,0.08), rgba(124,58,237,0.08));
+    border: 1px solid rgba(124,58,237,0.2); border-radius: 6px; padding: 36px; margin-bottom: 40px; text-align: center;
+  }
+  .pe-hero-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(22px, 4vw, 38px); font-weight: 800; letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px;
+  }
+  .pe-hero-sub { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 560px; margin: 0 auto; }
+
+  /* LADDER */
+  .ladder { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+  .ladder-step { display: flex; gap: 0; align-items: stretch; background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: all 0.2s; }
+  .ladder-step:hover { border-color: rgba(255,255,255,0.1); transform: translateX(4px); }
+  .step-num { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #000; width: 64px; min-width: 64px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-1 .step-num { background: var(--accent1); }
+  .step-2 .step-num { background: #f97316; }
+  .step-3 .step-num { background: var(--accent2); }
+  .step-4 .step-num { background: #8b5cf6; }
+  .step-5 .step-num { background: var(--accent3); }
+  .step-body { padding: 18px 20px; flex: 1; }
+  .step-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 10px; }
+  .step-impact { display: flex; align-items: center; gap: 8px; }
+  .impact-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+  .impact-dots { display: flex; gap: 4px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+  .dot.on { background: var(--green); }
+
+  /* TECHNIQUES GRID */
+  .techniques-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-bottom: 48px; }
+  .technique-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 24px; transition: all 0.2s; position: relative; overflow: hidden; }
+  .technique-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.2s; }
+  .tc-orange::after { background: var(--accent1); }
+  .tc-purple::after { background: var(--accent2); }
+  .tc-cyan::after { background: var(--accent3); }
+  .tc-gold::after { background: var(--gold); }
+  .tc-green::after { background: var(--green); }
+  .tc-pink::after { background: #ec4899; }
+  .technique-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-2px); }
+  .technique-card:hover::after { opacity: 1; }
+  .tc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .tc-name { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .tc-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+  .code-block { background: #0d0d14; border: 1px solid var(--border); border-radius: 3px; padding: 12px 14px; font-size: 16px; line-height: 1.6; color: #c0c0e0; overflow-x: auto; }
+  .code-label { font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
+  .c-tag { color: #7dd3fc; }
+  .c-val { color: #86efac; }
+  .c-comment { color: #4a4a6a; }
+  .c-key { color: var(--accent1); }
+
+  /* FORMULA */
+  .formula-wrap { background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.08)); border: 1px solid rgba(124,58,237,0.2); border-radius: 6px; padding: 32px; margin-bottom: 40px; text-align: center; }
+  .formula-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  .formula { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; }
+  .f-part { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 10px 16px; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); }
+  .f-op { color: var(--muted); font-size: 20px; font-weight: 300; }
+  .f-eq { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: var(--accent3); padding: 10px 16px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 4px; }
+
+  /* DO / DONT */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+  @media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col { border-radius: 4px; overflow: hidden; }
+  .compare-header { padding: 12px 18px; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .do-header { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.2); border-bottom: none; }
+  .dont-header { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); border-bottom: none; }
+  .compare-body { background: var(--card); padding: 16px 18px; }
+  .do-body { border: 1px solid rgba(16,185,129,0.2); border-top: none; }
+  .dont-body { border: 1px solid rgba(239,68,68,0.2); border-top: none; }
+  .compare-item { display: flex; gap: 10px; font-size: 14px; color: var(--muted); line-height: 1.55; padding: 7px 0; border-bottom: 1px solid var(--border); }
+  .compare-item:last-child { border-bottom: none; }
+
+  /* BUILDER */
+  .builder-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 32px; margin-bottom: 8px; }
+  .builder-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); margin-bottom: 6px; }
+  .builder-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .builder-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  @media (max-width: 600px) { .builder-fields { grid-template-columns: 1fr; } }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .field-group label { font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .field-group input, .field-group select, .field-group textarea { background: var(--card); border: 1px solid var(--border); border-radius: 3px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 16px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
+  .field-group input:focus, .field-group select:focus, .field-group textarea:focus { border-color: var(--accent2); }
+  .field-group select option { background: var(--card); }
+  .field-group textarea { resize: vertical; min-height: 70px; }
+  .build-btn { background: linear-gradient(135deg, var(--accent1), var(--accent2)); border: none; border-radius: 4px; color: #fff; font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 13px 28px; cursor: pointer; transition: opacity 0.2s, transform 0.2s; width: 100%; }
+  .build-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .builder-output { margin-top: 20px; display: none; }
+  .builder-output.visible { display: block; }
+  .output-label { font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent3); margin-bottom: 10px; }
+  .output-box { background: #0d0d14; border: 1px solid rgba(6,182,212,0.2); border-radius: 4px; padding: 18px; font-size: 16px; line-height: 1.75; color: #c0c0e0; white-space: pre-wrap; word-break: break-word; }
+  .copy-btn { margin-top: 10px; background: transparent; border: 1px solid var(--border); border-radius: 3px; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 17px; padding: 6px 16px; cursor: pointer; transition: all 0.2s; }
+  .copy-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">Official Anthropic Resources · 2025–2026</div>
+    <h1>Master Claude AI<br>in 3 Months</h1>
+    <p class="subtitle">Official courses + Anthropic's complete prompt engineering playbook — structured for beginners to advanced builders.</p>
+  </header>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('roadmap', this)">
+      <span>🗺️</span> 3-Month Roadmap
+    </button>
+    <button class="tab-btn" onclick="switchTab('prompting', this)">
+      <span>⚡</span> Prompt Engineering Guide
+    </button>
+  </div>
+
+  <!-- ===== TAB 1: ROADMAP ===== -->
+  <div class="tab-panel active" id="tab-roadmap">
+    <div class="progress-bar-wrap">
+      <span class="progress-label">Your Progress</span>
+      <div class="bar-track"><div class="bar-fill" id="bar"></div></div>
+      <span class="progress-count" id="count">0 / 12 done</span>
+    </div>
+
+    <section class="month-section m1">
+      <div class="month-header">
+        <div class="month-pill">Month 01</div>
+        <div class="month-title">Foundations & Prompting</div>
+        <div class="month-divider"></div>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Academy</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Claude for Everyone</div>
+          <div class="course-desc">Anthropic's official intro course — understand what Claude is, how to interact with it, and core use cases. No coding required.</div>
+          <div class="card-footer"><span class="duration">⏱ ~2–3 hrs</span><a href="https://anthropic.skilljar.com/" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">GitHub / Anthropic</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Prompt Engineering Interactive Tutorial</div>
+          <div class="course-desc">Step-by-step hands-on guide to key prompting techniques — officially released by Anthropic on GitHub. 9 chapters + exercises.</div>
+          <div class="card-footer"><span class="duration">⏱ ~4–6 hrs</span><a href="https://github.com/anthropics/courses" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Docs</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Prompt Engineering Overview</div>
+          <div class="course-desc">Official documentation covering all prompting strategies, chain-of-thought, few-shot, XML tags, and more.</div>
+          <div class="card-footer"><span class="duration">⏱ Self-paced</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Coursera</span><span class="free-tag paid">Free Trial</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Next-Gen AI Assistant: Claude by Anthropic</div>
+          <div class="course-desc">Guided project — set up Claude, write effective prompts, create marketing materials, and design launch strategies.</div>
+          <div class="card-footer"><span class="duration">⏱ ~2 hrs</span><a href="https://www.coursera.org/learn/next-generation-ai-assistant-claude-by-anthropic" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="month-section m2">
+      <div class="month-header">
+        <div class="month-pill">Month 02</div>
+        <div class="month-title">API, Tools & Real-World Builds</div>
+        <div class="month-divider"></div>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">GitHub / Anthropic</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Anthropic API Fundamentals</div>
+          <div class="course-desc">Get your API key, work with model parameters, write multimodal prompts, and handle streaming responses.</div>
+          <div class="card-footer"><span class="duration">⏱ ~5–8 hrs</span><a href="https://github.com/anthropics/courses" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">GitHub / Anthropic</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Tool Use (Function Calling)</div>
+          <div class="course-desc">Implement tool use in your Claude workflows — connect Claude to real-world functions and APIs with hands-on exercises.</div>
+          <div class="card-footer"><span class="duration">⏱ ~4–6 hrs</span><a href="https://github.com/anthropics/courses" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">GitHub / Anthropic</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Real-World Prompting</div>
+          <div class="course-desc">Incorporate techniques into complex, production-level prompts — includes AWS & Google Vertex versions.</div>
+          <div class="card-footer"><span class="duration">⏱ ~3–5 hrs</span><a href="https://github.com/anthropics/courses" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">GitHub / Anthropic</span><span class="free-tag free">Free</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Prompt Evaluations</div>
+          <div class="course-desc">Write production-grade prompt evaluations to measure and improve prompt quality with systematic testing.</div>
+          <div class="card-footer"><span class="duration">⏱ ~3–4 hrs</span><a href="https://github.com/anthropics/courses" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="month-section m3">
+      <div class="month-header">
+        <div class="month-pill">Month 03</div>
+        <div class="month-title">Advanced: MCP, Claude Code & AI Fluency</div>
+        <div class="month-divider"></div>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Academy</span><span class="free-tag free">Free + Cert</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Model Context Protocol (MCP) — Core</div>
+          <div class="course-desc">Build MCP servers and clients in Python. Master tools, resources, and prompts to connect Claude with external services.</div>
+          <div class="card-footer"><span class="duration">⏱ ~6–8 hrs</span><a href="https://anthropic.skilljar.com/" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Academy</span><span class="free-tag free">Free + Cert</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Advanced MCP Patterns</div>
+          <div class="course-desc">Sampling, notifications, file system access, and transport mechanisms for production-ready MCP server development.</div>
+          <div class="card-footer"><span class="duration">⏱ ~4–6 hrs</span><a href="https://anthropic.skilljar.com/" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Academy</span><span class="free-tag free">Free + Cert</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">Claude Code — Beginner to Advanced</div>
+          <div class="course-desc">Official course on Claude Code: agentic coding, GitHub integration, multi-agent orchestration, and MCP tools.</div>
+          <div class="card-footer"><span class="duration">⏱ ~5–7 hrs</span><a href="https://anthropic.skilljar.com/" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+        <div class="course-card" onclick="toggle(this)">
+          <div class="card-top"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="platform-tag">Anthropic Academy</span><span class="free-tag free">Free + Cert</span></div><div class="checkbox">✓</div></div>
+          <div class="course-name">AI Fluency for Professionals</div>
+          <div class="course-desc">For teams, educators, and leaders — increase organizational AI impact and embed responsible AI practices.</div>
+          <div class="card-footer"><span class="duration">⏱ ~3–4 hrs</span><a href="https://anthropic.skilljar.com/" target="_blank" class="visit-link" onclick="event.stopPropagation()">Visit →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tips">
+      <div class="tips-title">✦ Pro Tips for Your Journey</div>
+      <div class="tips-grid">
+        <div class="tip"><span class="tip-icon">🎯</span><div class="tip-text"><strong>Start with Academy</strong>Visit anthropic.skilljar.com — all official courses, free, with completion certificates.</div></div>
+        <div class="tip"><span class="tip-icon">💻</span><div class="tip-text"><strong>GitHub Courses</strong>github.com/anthropics/courses has hands-on Jupyter notebooks — the best practical training.</div></div>
+        <div class="tip"><span class="tip-icon">📖</span><div class="tip-text"><strong>Read the Docs</strong>docs.anthropic.com is updated weekly. Bookmark the prompt engineering section.</div></div>
+        <div class="tip"><span class="tip-icon">🏆</span><div class="tip-text"><strong>Earn Certificates</strong>Anthropic Academy issues free certificates — add them to your LinkedIn profile.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB 2: PROMPT ENGINEERING ===== -->
+  <div class="tab-panel" id="tab-prompting">
+
+    <div class="pe-hero">
+      <div class="pe-hero-title">Anthropic's Official Prompt Engineering Playbook</div>
+      <p class="pe-hero-sub">Everything Claude responds best to — from the 5-step improvement ladder to XML tags, chain-of-thought, and an interactive prompt builder. Based directly on Anthropic's official guidelines for Claude 4.x models.</p>
+    </div>
+
+    <!-- 5-STEP LADDER -->
+    <div class="section-label">Anthropic's 5-Step Improvement Ladder</div>
+    <div class="ladder">
+      <div class="ladder-step step-1">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-name">Be Clear & Direct</div>
+          <div class="step-desc">Strip out fluff. Use plain, explicit language. Think of Claude as a highly capable but literal assistant — if you want "above and beyond" behavior, ask for it explicitly rather than hoping Claude infers it.</div>
+          <div class="step-impact"><span class="impact-label">Impact</span><div class="impact-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div></div></div>
+        </div>
+      </div>
+      <div class="ladder-step step-2">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-name">Use Examples (Few-Shot Prompting)</div>
+          <div class="step-desc">Don't just tell — show. Provide 2–5 worked input/output examples. Curate diverse, canonical examples that portray expected behavior rather than exhaustively listing every edge case.</div>
+          <div class="step-impact"><span class="impact-label">Impact</span><div class="impact-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div></div></div>
+        </div>
+      </div>
+      <div class="ladder-step step-3">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-name">Give Claude Space to Think (Chain-of-Thought)</div>
+          <div class="step-desc">Tell Claude to "think step by step" or use &lt;thinking&gt; tags. Giving Claude time to reason before answering dramatically improves accuracy for logic, math, analysis, and complex decisions.</div>
+          <div class="step-impact"><span class="impact-label">Impact</span><div class="impact-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div></div></div>
+        </div>
+      </div>
+      <div class="ladder-step step-4">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-name">Use XML Tags to Structure Context</div>
+          <div class="step-desc">Wrap prompt sections in XML tags like &lt;instructions&gt;, &lt;context&gt;, &lt;examples&gt;, &lt;output_format&gt;. Claude processes tagged sections distinctly — critical for long, multi-part prompts with lots of information.</div>
+          <div class="step-impact"><span class="impact-label">Impact</span><div class="impact-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div></div>
+        </div>
+      </div>
+      <div class="ladder-step step-5">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-name">Prompt Chaining for Complex Tasks</div>
+          <div class="step-desc">Break multi-step work into a pipeline of focused prompts — the output of one feeds the next. This improves accuracy, simplifies debugging, and keeps Claude fully focused on one subtask at a time.</div>
+          <div class="step-impact"><span class="impact-label">Impact</span><div class="impact-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULA -->
+    <div class="formula-wrap">
+      <div class="formula-title">The Anatomy of a Perfect Prompt</div>
+      <div class="formula">
+        <div class="f-part">🎭 Role / Persona</div>
+        <div class="f-op">+</div>
+        <div class="f-part">📋 Task Context</div>
+        <div class="f-op">+</div>
+        <div class="f-part">📎 Background Data</div>
+        <div class="f-op">+</div>
+        <div class="f-part">📏 Rules & Format</div>
+        <div class="f-op">+</div>
+        <div class="f-part">💡 Examples</div>
+        <div class="f-op">=</div>
+        <div class="f-eq">✨ Great Output</div>
+      </div>
+    </div>
+
+    <!-- TECHNIQUES -->
+    <div class="section-label">Key Techniques & When to Use Them</div>
+    <div class="techniques-grid">
+      <div class="technique-card tc-orange">
+        <span class="tc-icon">🎭</span>
+        <div class="tc-name">Role Prompting</div>
+        <div class="tc-desc">Assign Claude a specific expert persona. This sets tone, expertise level, and communication style for the entire session.</div>
+        <span class="code-label">Example</span>
+        <div class="code-block"><span class="c-tag">You are an expert Python developer</span><br><span class="c-tag">with 10 years of experience in</span><br><span class="c-tag">building scalable REST APIs.</span></div>
+      </div>
+      <div class="technique-card tc-purple">
+        <span class="tc-icon">🏷️</span>
+        <div class="tc-name">XML Tag Structuring</div>
+        <div class="tc-desc">Use XML tags to separate prompt components. Claude processes each section distinctly — critical for long, complex prompts.</div>
+        <span class="code-label">Example</span>
+        <div class="code-block"><span class="c-tag">&lt;instructions&gt;</span><br>&nbsp;&nbsp;Summarize the article below<br><span class="c-tag">&lt;/instructions&gt;</span><br><span class="c-tag">&lt;article&gt;</span><br>&nbsp;&nbsp;<span class="c-comment">[paste content here]</span><br><span class="c-tag">&lt;/article&gt;</span></div>
+      </div>
+      <div class="technique-card tc-cyan">
+        <span class="tc-icon">🧠</span>
+        <div class="tc-name">Chain-of-Thought</div>
+        <div class="tc-desc">Ask Claude to reason step-by-step before answering. Dramatically improves accuracy for logic, math, and analysis tasks.</div>
+        <span class="code-label">Example</span>
+        <div class="code-block"><span class="c-tag">Think step by step inside</span><br><span class="c-tag">&lt;thinking&gt;&lt;/thinking&gt; tags,</span><br><span class="c-tag">then give your final answer</span><br><span class="c-tag">in &lt;answer&gt;&lt;/answer&gt; tags.</span></div>
+      </div>
+      <div class="technique-card tc-gold">
+        <span class="tc-icon">📸</span>
+        <div class="tc-name">Few-Shot Examples</div>
+        <div class="tc-desc">Show Claude 2–5 input/output pairs before your real request. One of the highest-impact techniques for format and style control.</div>
+        <span class="code-label">Example</span>
+        <div class="code-block"><span class="c-key">Input:</span> <span class="c-val">"The weather is nice"</span><br><span class="c-key">Sentiment:</span> <span class="c-val">Positive</span><br><br><span class="c-key">Input:</span> <span class="c-val">"I missed my flight"</span><br><span class="c-key">Sentiment:</span> <span class="c-val">Negative</span><br><br><span class="c-key">Input:</span> <span class="c-val">"[your text]"</span><br><span class="c-key">Sentiment:</span></div>
+      </div>
+      <div class="technique-card tc-green">
+        <span class="tc-icon">🔗</span>
+        <div class="tc-name">Prompt Chaining</div>
+        <div class="tc-desc">Break multi-step tasks into a pipeline of focused prompts. Output of one feeds the next — perfect for research, writing, and analysis.</div>
+        <span class="code-label">Example Flow</span>
+        <div class="code-block"><span class="c-comment">Step 1:</span> <span class="c-val">Extract key points</span><br><span class="c-comment">   ↓ output feeds in</span><br><span class="c-comment">Step 2:</span> <span class="c-val">Draft outline</span><br><span class="c-comment">   ↓ output feeds in</span><br><span class="c-comment">Step 3:</span> <span class="c-val">Write full article</span></div>
+      </div>
+      <div class="technique-card tc-pink">
+        <span class="tc-icon">🎯</span>
+        <div class="tc-name">Output Format Control</div>
+        <div class="tc-desc">Specify exactly the format you want — JSON, markdown, a table, bullet points, or a specific word count. Claude follows precisely.</div>
+        <span class="code-label">Example</span>
+        <div class="code-block"><span class="c-tag">Return a JSON object with keys:</span><br><span class="c-tag">"summary", "sentiment",</span><br><span class="c-tag">"keywords".</span><br><span class="c-tag">Keep summary under 50 words.</span></div>
+      </div>
+    </div>
+
+    <!-- DO / DON'T -->
+    <div class="section-label">Do's & Don'ts — Anthropic Official Guidelines</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-header do-header">✅ Do This</div>
+        <div class="compare-body do-body">
+          <div class="compare-item"><span>✅</span> Be specific about output format and length</div>
+          <div class="compare-item"><span>✅</span> Provide relevant context and background data</div>
+          <div class="compare-item"><span>✅</span> Tell Claude what to do, not just what to avoid</div>
+          <div class="compare-item"><span>✅</span> Use XML tags to separate distinct sections</div>
+          <div class="compare-item"><span>✅</span> Include 2–3 examples for format-sensitive tasks</div>
+          <div class="compare-item"><span>✅</span> Test and iterate — treat it like a science</div>
+          <div class="compare-item"><span>✅</span> Ask Claude to "think step by step" for complex tasks</div>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-header dont-header">❌ Avoid This</div>
+        <div class="compare-body dont-body">
+          <div class="compare-item"><span>❌</span> Vague language like "make it better"</div>
+          <div class="compare-item"><span>❌</span> Stuffing 20+ edge cases into one prompt</div>
+          <div class="compare-item"><span>❌</span> Jumping to fine-tuning before fixing prompts first</div>
+          <div class="compare-item"><span>❌</span> Assuming Claude knows your unstated context</div>
+          <div class="compare-item"><span>❌</span> Overloading with too many tools or instructions</div>
+          <div class="compare-item"><span>❌</span> Writing prompts only you can understand (clarity test: would a colleague understand it?)</div>
+          <div class="compare-item"><span>❌</span> Relying on Claude to infer tone, style, and audience</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE BUILDER -->
+    <div class="builder-wrap">
+      <div class="builder-title">⚡ Interactive Prompt Builder</div>
+      <p class="builder-sub">Fill in the fields and click "Build My Prompt" — get a structured, production-ready prompt following Anthropic's official guidelines, ready to copy directly into Claude.</p>
+      <div class="builder-fields">
+        <div class="field-group">
+          <label>Role / Persona</label>
+          <input type="text" id="b-role" placeholder="e.g. Expert data analyst, Senior UX writer..." />
+        </div>
+        <div class="field-group">
+          <label>Task</label>
+          <input type="text" id="b-task" placeholder="e.g. Summarize customer feedback..." />
+        </div>
+        <div class="field-group">
+          <label>Audience</label>
+          <input type="text" id="b-audience" placeholder="e.g. Non-technical executives, beginners..." />
+        </div>
+        <div class="field-group">
+          <label>Output Format</label>
+          <select id="b-format">
+            <option value="a clear, well-structured prose response">Clear prose</option>
+            <option value="a numbered list">Numbered list</option>
+            <option value="a markdown table">Markdown table</option>
+            <option value="a JSON object">JSON object</option>
+            <option value="a concise bullet-point summary">Bullet-point summary</option>
+            <option value="a step-by-step guide">Step-by-step guide</option>
+          </select>
+        </div>
+        <div class="field-group" style="grid-column: 1 / -1;">
+          <label>Additional Context / Rules (optional)</label>
+          <textarea id="b-context" placeholder="e.g. Keep it under 200 words. Use a professional but friendly tone. Avoid technical jargon..."></textarea>
+        </div>
+      </div>
+      <button class="build-btn" onclick="buildPrompt()">⚡ Build My Prompt</button>
+      <div class="builder-output" id="builder-output">
+        <div class="output-label">✦ Your Generated Prompt</div>
+        <div class="output-box" id="output-box"></div>
+        <button class="copy-btn" onclick="copyPrompt()">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  const TOTAL = 12;
+
+  function toggle(card) {
+    card.classList.toggle('completed');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = document.querySelectorAll('.course-card.completed').length;
+    const pct = (done / TOTAL) * 100;
+    document.getElementById('bar').style.width = pct + '%';
+    document.getElementById('count').textContent = done + ' / ' + TOTAL + ' done';
+  }
+
+  updateProgress();
+
+  function buildPrompt() {
+    const role = document.getElementById('b-role').value.trim();
+    const task = document.getElementById('b-task').value.trim();
+    const audience = document.getElementById('b-audience').value.trim();
+    const format = document.getElementById('b-format').value;
+    const context = document.getElementById('b-context').value.trim();
+
+    if (!task) { alert('Please enter at least a Task to build a prompt.'); return; }
+
+    let prompt = '';
+    if (role) prompt += `<role>\nYou are ${role}.\n</role>\n\n`;
+
+    prompt += `<instructions>\n${task}`;
+    if (audience) prompt += `\n\nYour audience is: ${audience}.`;
+    prompt += `\n\nFormat your response as ${format}.`;
+    if (context) prompt += `\n\nAdditional rules:\n${context}`;
+    prompt += `\n</instructions>`;
+    prompt += `\n\n<thinking>\nThink step by step before providing your final response.\n</thinking>`;
+
+    document.getElementById('output-box').textContent = prompt;
+    const out = document.getElementById('builder-output');
+    out.classList.add('visible');
+    out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function copyPrompt() {
+    const text = document.getElementById('output-box').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = '📋 Copy to Clipboard'; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
